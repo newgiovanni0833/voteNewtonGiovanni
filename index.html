@@ -177,7 +177,17 @@ ul.clean li::marker{color:#5cbb69}
 .btn{background:var(--forest);color:#fff;border:0;border-radius:999px;padding:11px 20px;font-weight:700;min-height:44px}
 .btn.alt{background:var(--sun);color:var(--deep)}
 
-/* compromissos e fechamento */
+/* propostas validadas */
+.props{display:grid;gap:14px}
+.prop{background:var(--card);border:1px solid var(--line);border-radius:14px;overflow:hidden;display:grid;grid-template-columns:96px 1fr}
+.prop .side{background:var(--forest);color:var(--sun);font-family:var(--display);font-size:56px;display:grid;place-items:center;min-height:110px}
+.prop.blood .side{background:var(--blood)}
+.prop .body{padding:20px 24px;display:flex;flex-direction:column;justify-content:center}
+.prop h3{font-family:var(--display);text-transform:uppercase;font-size:clamp(24px,3vw,30px);letter-spacing:.02em}
+.prop p{color:var(--muted);font-size:17px;margin-top:6px;max-width:70ch}
+@media (max-width:520px){.prop{grid-template-columns:64px 1fr}.prop .side{font-size:40px}}
+
+/* fechamento */
 .commit{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px}
 .commit div{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:16px}
 .commit b{display:block;font-family:var(--display);font-weight:400;text-transform:uppercase;font-size:22px;color:var(--forest);margin-bottom:4px}
@@ -205,7 +215,6 @@ footer{padding:22px 0 30px;font-size:13px;color:var(--muted)}
     <ul>
       <li><a href="#historico">O que já fizemos</a></li>
       <li><a href="#propostas">O que vou propor</a></li>
-      <li><a href="#teste">Teste rápido</a></li>
     </ul>
   </div>
 </nav>
@@ -236,18 +245,7 @@ footer{padding:22px 0 30px;font-size:13px;color:var(--muted)}
 </header>
 
 <main>
-<section class="crono-sec" aria-labelledby="crono-h">
-  <div class="wrap">
-    <h2 id="crono-h" class="crono-h">Cronograma da eleição · CIPA Gestão 2027</h2>
-    <ol class="crono" id="crono">
-      <li data-a="2026-10-26" data-b="2026-11-09"><b>Inscrições</b><span class="num">26/10 a 09/11</span></li>
-      <li data-a="2026-11-10" data-b="2026-11-10"><b>Lista de candidatos</b><span class="num">10/11</span></li>
-      <li data-a="2026-11-16" data-b="2026-11-26"><b>Campanha</b><span class="num">16/11 a 26/11</span></li>
-      <li data-a="2026-11-27" data-b="2026-11-27"><b>Votação</b><span class="num">27/11 · 7h30 às 17h30</span></li>
-      <li data-a="2026-11-30" data-b="2026-11-30"><b>Resultado</b><span class="num">30/11 · 13h</span></li>
-    </ol>
-  </div>
-</section>
+
 <section id="historico">
   <div class="wrap">
     <div class="band">
@@ -269,68 +267,28 @@ footer{padding:22px 0 30px;font-size:13px;color:var(--muted)}
       <h2>O que vou <span>propor</span></h2>
       <p>Ideias que vou levar à comissão eleita, para avaliação e aprovação, pensadas para os colaboradores de todas as unidades.</p>
     </div>
-    <div class="tabs" role="tablist" aria-label="Propostas">
-      <button class="tab" role="tab" id="t1" aria-controls="p1" aria-selected="true"><span class="n">1</span>Canal “Viu, avisou”</button>
-      <button class="tab" role="tab" id="t2" aria-controls="p2" aria-selected="false" tabindex="-1"><span class="n">2</span>Quiz do Mês</button>
-      <button class="tab blood" role="tab" id="t3" aria-controls="p3" aria-selected="false" tabindex="-1"><span class="n">3</span>Doação de sangue</button>
-    </div>
-    <div class="panel" role="tabpanel" id="p1" aria-labelledby="t1">
-      <div class="side">1</div>
-      <div class="body">
-        <h3>Canal “Viu, avisou”</h3>
-        <p class="goal">Propor um canal simples para qualquer colaborador relatar uma situação de risco.</p>
-        <ul class="clean"><li>Formulário pelo celular, com espaço para foto e local.</li><li>Relatos analisados nas reuniões da CIPA.</li><li>Retorno a quem relatou sobre o encaminhamento dado.</li></ul>
-      </div>
-    </div>
-    <div class="panel" role="tabpanel" id="p2" aria-labelledby="t2" hidden>
-      <div class="side">2</div>
-      <div class="body">
-        <h3>Quiz do Mês</h3>
-        <p class="goal">Propor um quiz curto por mês sobre um tema de segurança e saúde no trabalho.</p>
-        <ul class="clean"><li>7 perguntas no site, com o mesmo sistema usado no quiz da SIPAT.</li><li>Gabarito comentado depois que o quiz fecha.</li><li>Ranking de participação por unidade, proporcional ao tamanho de cada uma.</li></ul>
-      </div>
-    </div>
-    <div class="panel blood" role="tabpanel" id="p3" aria-labelledby="t3" hidden>
-      <div class="side"><svg width="44" height="58" viewBox="0 0 40 52" aria-hidden="true"><path d="M20 2C20 2 4 22 4 33a16 16 0 0 0 32 0C36 22 20 2 20 2z" fill="none" stroke="#ffffff" stroke-width="3" stroke-linejoin="round"/></svg></div>
-      <div class="body">
-        <h3>Doação de sangue duas vezes por ano</h3>
-        <p class="goal">Propor repetir a campanha de doação de sangue em dois momentos do ano.</p>
-        <ul class="clean"><li>Junho (Junho Vermelho) e dezembro, antes das férias e das festas de fim de ano.</li><li>Divulgação dos critérios para doar e agendamento em grupo.</li><li>Participação aberta aos colaboradores de todas as unidades.</li></ul>
-      </div>
-    </div>
-    <div class="pager">
-      <button type="button" id="prev">← Proposta anterior</button>
-      <button type="button" id="next">Próxima proposta →</button>
+    <div class="props">
+      <article class="prop blood"><div class="side"><svg width="36" height="48" viewBox="0 0 40 52" aria-hidden="true"><path d="M20 2C20 2 4 22 4 33a16 16 0 0 0 32 0C36 22 20 2 20 2z" fill="none" stroke="#ffffff" stroke-width="3" stroke-linejoin="round"/></svg></div><div class="body"><h3>Doação de sangue duas vezes por ano</h3><p>Propor repetir a campanha de doação de sangue em dois momentos do ano.</p></div></article>
+      <article class="prop"><div class="side">2</div><div class="body"><h3>Quiz do Mês</h3><p>Propor um quiz curto por mês sobre um tema de segurança e saúde no trabalho.</p></div></article>
+      <article class="prop"><div class="side">1</div><div class="body"><h3>Canal “Viu, avisou”</h3><p>Disponibilizar um canal simples e acessivel para que os colaboradores possam comunicar situações de risco relacionadas à saúde e à segurança do trabalho.</p></div></article>
     </div>
   </div>
 </section>
 
 
 
-<section id="teste">
-  <div class="wrap">
-    <div class="band">
-      <h2>Teste <span>rápido</span></h2>
-      <p>Uma amostra de como poderia ser o Quiz do Mês. São 3 perguntas, sem registro de respostas.</p>
-    </div>
-    <div class="quiz" id="quiz"></div>
-  </div>
-</section>
+
 
 
 </main>
 
 <div class="closing">
   <div class="wrap">
-    <div>
-      <p class="big">Newton <span>Giovanni</span></p>
-      <p>Seu voto é livre e consciente. Conheça os candidatos e escolha quem vai cuidar da segurança e da saúde de todos.</p>
-      <div class="share">
-        <a class="wa" id="wa" href="https://wa.me/?text=Conhe%C3%A7a%20as%20propostas%20de%20Newton%20Giovanni%20para%20a%20CIPA%202027" target="_blank" rel="noopener">Enviar no WhatsApp</a>
-        <button type="button" id="copy">Copiar link</button>
-      </div>
+    <p class="big">Newton <span>Giovanni</span></p>
+    <div class="share">
+      <a class="wa" id="wa" href="https://wa.me/" target="_blank" rel="noopener">Enviar no WhatsApp</a>
+      <button type="button" id="copy">Copiar link</button>
     </div>
-    <div class="vote">Votação<b class="num">27/11 · 7h30 às 17h30</b></div>
   </div>
 </div>
 <footer><div class="wrap">CIPA · SENAR-MT · Eleição Gestão 2027</div></footer>
@@ -352,71 +310,6 @@ footer{padding:22px 0 30px;font-size:13px;color:var(--muted)}
     document.getElementById('cm').textContent = pad(Math.floor(s%3600/60));
   }
   tick(); setInterval(tick, 30000);
-  var today = new Date(Date.now() - 4*3600*1000).toISOString().slice(0,10);
-  Array.prototype.forEach.call(document.querySelectorAll('#crono li'), function(li){
-    var a = li.getAttribute('data-a'), b = li.getAttribute('data-b');
-    if (today > b) li.className = 'done'; else if (today >= a) li.className = 'now';
-  });
-
-  /* ---------- abas das propostas ---------- */
-  var tabs = Array.prototype.slice.call(document.querySelectorAll('.tab'));
-  var cur = 0;
-  function show(i, focus){
-    cur = i;
-    tabs.forEach(function(t, k){
-      var on = k === i;
-      t.setAttribute('aria-selected', on);
-      t.tabIndex = on ? 0 : -1;
-      document.getElementById(t.getAttribute('aria-controls')).hidden = !on;
-    });
-    if (focus) tabs[i].focus();
-    document.getElementById('prev').disabled = i === 0;
-    document.getElementById('next').disabled = i === tabs.length-1;
-  }
-  tabs.forEach(function(t, k){
-    t.addEventListener('click', function(){ show(k); });
-    t.addEventListener('keydown', function(e){
-      if (e.key === 'ArrowRight'){ e.preventDefault(); show((k+1)%tabs.length, true); }
-      if (e.key === 'ArrowLeft'){ e.preventDefault(); show((k-1+tabs.length)%tabs.length, true); }
-    });
-  });
-  document.getElementById('prev').addEventListener('click', function(){ if(cur>0) show(cur-1); });
-  document.getElementById('next').addEventListener('click', function(){ if(cur<tabs.length-1) show(cur+1); });
-  show(0);
-
-  /* ---------- teste rápido ---------- */
-  var Q = [
-    {q:'Em uma viagem longa a serviço, de quanto em quanto tempo é recomendado fazer uma pausa?', o:['A cada 30 minutos','A cada 2 horas','Só ao chegar ao destino','Só quando sentir dor nas costas'], c:1, e:'Pausas a cada 2 horas ajudam a evitar a fadiga ao volante.'},
-    {q:'Qual campanha do ano é dedicada à segurança no trânsito?', o:['Abril Verde','Maio Amarelo','Outubro Rosa','Janeiro Branco'], c:1, e:'O Maio Amarelo é o movimento pela segurança no trânsito.'},
-    {q:'Bateu sono enquanto dirige. O que fazer?', o:['Abrir a janela e seguir','Aumentar o som do rádio','Parar em local seguro e descansar','Tomar um café e acelerar para chegar logo'], c:2, e:'Janela aberta, som alto e café só disfarçam o sono por pouco tempo. O seguro é parar e descansar.'}
-  ];
-  var qi = 0, score = 0, el = document.getElementById('quiz');
-  function render(){
-    if (qi >= Q.length){
-      el.innerHTML = '<p class="step">Resultado</p><p class="q">Você acertou '+score+' de '+Q.length+'.</p><p>Na proposta do Quiz do Mês, as perguntas mudariam a cada mês e o gabarito comentado sairia depois do fechamento.</p><div class="qnav"><button class="btn alt" type="button" id="again">Fazer de novo</button></div>';
-      document.getElementById('again').addEventListener('click', function(){ qi=0; score=0; render(); });
-      return;
-    }
-    var it = Q[qi];
-    el.innerHTML = '<p class="step">Pergunta '+(qi+1)+' de '+Q.length+'</p><p class="q">'+it.q+'</p><div class="opts">'+
-      it.o.map(function(o,k){return '<button class="opt" type="button" data-k="'+k+'">'+o+'</button>';}).join('')+
-      '</div><p class="fb" id="fb" aria-live="polite"></p><div class="qnav"><button class="btn" type="button" id="nx" hidden>'+(qi===Q.length-1?'Ver resultado':'Próxima')+'</button></div>';
-    Array.prototype.forEach.call(el.querySelectorAll('.opt'), function(b){
-      b.addEventListener('click', function(){
-        var k = +b.getAttribute('data-k'), ok = k === it.c;
-        if (ok) score++;
-        Array.prototype.forEach.call(el.querySelectorAll('.opt'), function(x){
-          x.disabled = true;
-          if (+x.getAttribute('data-k') === it.c) x.classList.add('ok');
-        });
-        if (!ok) b.classList.add('no');
-        document.getElementById('fb').textContent = (ok ? 'Certo! ' : 'Quase. ') + it.e;
-        var nx = document.getElementById('nx'); nx.hidden = false; nx.focus();
-        nx.addEventListener('click', function(){ qi++; render(); });
-      });
-    });
-  }
-  render();
 
   /* ---------- compartilhar ---------- */
   var url = location.href.split('#')[0];
@@ -437,7 +330,7 @@ footer{padding:22px 0 30px;font-size:13px;color:var(--muted)}
         if (e.isIntersecting) links.forEach(function(a){ a.classList.toggle('on', a.getAttribute('href') === '#'+e.target.id); });
       });
     }, {rootMargin:'-45% 0px -50% 0px'});
-    ['historico','propostas','teste'].forEach(function(id){ io.observe(document.getElementById(id)); });
+    ['historico','propostas'].forEach(function(id){ io.observe(document.getElementById(id)); });
   }
 })();
 </script>

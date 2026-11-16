@@ -215,6 +215,7 @@ footer{padding:22px 0 30px;font-size:13px;color:var(--muted)}
     <ul>
       <li><a href="#historico">O que já fizemos</a></li>
       <li><a href="#propostas">O que vou propor</a></li>
+      <li><a href="#teste">Teste rápido</a></li>
     </ul>
   </div>
 </nav>
@@ -280,6 +281,15 @@ footer{padding:22px 0 30px;font-size:13px;color:var(--muted)}
 
 
 
+<section id="teste">
+  <div class="wrap">
+    <div class="band">
+      <h2>Teste <span>rápido</span></h2>
+      <p>Uma amostra de como poderia ser o Quiz do Mês. São 3 perguntas, sem registro de respostas.</p>
+    </div>
+    <div class="quiz" id="quiz"></div>
+  </div>
+</section>
 </main>
 
 <div class="closing">
@@ -311,6 +321,40 @@ footer{padding:22px 0 30px;font-size:13px;color:var(--muted)}
   }
   tick(); setInterval(tick, 30000);
 
+  /* ---------- teste rápido ---------- */
+  var Q = [
+    {q:'Em uma viagem longa a serviço, de quanto em quanto tempo é recomendado fazer uma pausa?', o:['A cada 30 minutos','A cada 2 horas','Só ao chegar ao destino','Só quando sentir dor nas costas'], c:1, e:'Pausas a cada 2 horas ajudam a evitar a fadiga ao volante.'},
+    {q:'Qual campanha do ano é dedicada à segurança no trânsito?', o:['Abril Verde','Maio Amarelo','Outubro Rosa','Janeiro Branco'], c:1, e:'O Maio Amarelo é o movimento pela segurança no trânsito.'},
+    {q:'Bateu sono enquanto dirige. O que fazer?', o:['Abrir a janela e seguir','Aumentar o som do rádio','Parar em local seguro e descansar','Tomar um café e acelerar para chegar logo'], c:2, e:'Janela aberta, som alto e café só disfarçam o sono por pouco tempo. O seguro é parar e descansar.'}
+  ];
+  var qi = 0, score = 0, el = document.getElementById('quiz');
+  function render(){
+    if (qi >= Q.length){
+      el.innerHTML = '<p class="step">Resultado</p><p class="q">Você acertou '+score+' de '+Q.length+'.</p><p>Na proposta do Quiz do Mês, as perguntas mudariam a cada mês e o gabarito comentado sairia depois do fechamento.</p><div class="qnav"><button class="btn alt" type="button" id="again">Fazer de novo</button></div>';
+      document.getElementById('again').addEventListener('click', function(){ qi=0; score=0; render(); });
+      return;
+    }
+    var it = Q[qi];
+    el.innerHTML = '<p class="step">Pergunta '+(qi+1)+' de '+Q.length+'</p><p class="q">'+it.q+'</p><div class="opts">'+
+      it.o.map(function(o,k){return '<button class="opt" type="button" data-k="'+k+'">'+o+'</button>';}).join('')+
+      '</div><p class="fb" id="fb" aria-live="polite"></p><div class="qnav"><button class="btn" type="button" id="nx" hidden>'+(qi===Q.length-1?'Ver resultado':'Próxima')+'</button></div>';
+    Array.prototype.forEach.call(el.querySelectorAll('.opt'), function(b){
+      b.addEventListener('click', function(){
+        var k = +b.getAttribute('data-k'), ok = k === it.c;
+        if (ok) score++;
+        Array.prototype.forEach.call(el.querySelectorAll('.opt'), function(x){
+          x.disabled = true;
+          if (+x.getAttribute('data-k') === it.c) x.classList.add('ok');
+        });
+        if (!ok) b.classList.add('no');
+        document.getElementById('fb').textContent = (ok ? 'Certo! ' : 'Quase. ') + it.e;
+        var nx = document.getElementById('nx'); nx.hidden = false; nx.focus();
+        nx.addEventListener('click', function(){ qi++; render(); });
+      });
+    });
+  }
+  render();
+
   /* ---------- compartilhar ---------- */
   var url = location.href.split('#')[0];
   document.getElementById('wa').href = 'https://wa.me/?text=' + encodeURIComponent('Conheça as propostas de Newton Giovanni para a CIPA 2027: ' + url);
@@ -330,7 +374,7 @@ footer{padding:22px 0 30px;font-size:13px;color:var(--muted)}
         if (e.isIntersecting) links.forEach(function(a){ a.classList.toggle('on', a.getAttribute('href') === '#'+e.target.id); });
       });
     }, {rootMargin:'-45% 0px -50% 0px'});
-    ['historico','propostas'].forEach(function(id){ io.observe(document.getElementById(id)); });
+    ['historico','propostas','teste'].forEach(function(id){ io.observe(document.getElementById(id)); });
   }
 })();
 </script>
